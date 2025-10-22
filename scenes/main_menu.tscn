@@ -249,6 +249,11 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_wu84c")
 theme_override_styles/focus = SubResource("StyleBoxFlat_oa1go")
 text = "BACK"
 
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="Button_Play" to="." method="_on_button_play_pressed"]
 [connection signal="pressed" from="Button_Setting" to="." method="_on_button_setting_pressed"]
 [connection signal="pressed" from="Button_Exit" to="." method="_on_button_exit_pressed"]
