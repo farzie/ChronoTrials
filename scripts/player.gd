@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-const MOVE_SPEED := 500.0
+const MOVE_SPEED := 150.0
 var direction := Vector2.ZERO
 var cardinal_dir := Vector2.DOWN
 var state := "idle"
