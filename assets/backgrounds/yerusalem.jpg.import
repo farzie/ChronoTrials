@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt0kipmjgrhu7"
-path="res://.godot/imported/bg_main.jpg-b62baf479d5e363ca673f623189209af.ctex"
+uid="uid://bntn7pov0gb44"
+path="res://.godot/imported/yerusalem.jpg-e80f4e265a6107031c6308a8dc15e7ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/backgrounds/bg_main.jpg"
-dest_files=["res://.godot/imported/bg_main.jpg-b62baf479d5e363ca673f623189209af.ctex"]
+source_file="res://assets/backgrounds/yerusalem.jpg"
+dest_files=["res://.godot/imported/yerusalem.jpg-e80f4e265a6107031c6308a8dc15e7ba.ctex"]
 
 [params]
 

@@ -5,6 +5,7 @@ const MOVE_SPEED := 150.0
 var direction := Vector2.ZERO
 var cardinal_dir := Vector2.DOWN
 var state := "idle"
+var can_move := true
 
 @onready var anim := $AnimationPlayer
 
@@ -12,11 +13,22 @@ func _ready():
 	_update_anim()
 
 func _process(_delta):
+	if not can_move:
+		direction = Vector2.ZERO
+		_set_state()
+		_update_anim()
+		return
+
 	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
 	if _set_state() or _set_dir():
 		_update_anim()
 
 func _physics_process(_delta):
+	if not can_move:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	velocity = direction * MOVE_SPEED
 	move_and_slide()
 

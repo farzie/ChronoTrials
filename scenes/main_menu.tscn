@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dpt5bkob0uyg1"]
+[gd_scene load_steps=19 format=3 uid="uid://dpt5bkob0uyg1"]
 
 [ext_resource type="Script" uid="uid://mynvxsxg8qh5" path="res://scripts/main_menu.gd" id="1_bqqt6"]
-[ext_resource type="Texture2D" uid="uid://dt0kipmjgrhu7" path="res://assets/images/backgrounds/bg_main.jpg" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://dt0kipmjgrhu7" path="res://assets/backgrounds/bg_main.jpg" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://c6vea7p880qnd" path="res://assets/fonts/press-start-2p-font/PressStart2P-vaV7.ttf" id="2_ekxnf"]
 [ext_resource type="FontFile" uid="uid://dlcywn1wkeki5" path="res://assets/fonts/poppins-font/PoppinsBlack-VxOe.otf" id="4_wu84c"]
+[ext_resource type="AudioStream" uid="uid://cp1aymumrcs6g" path="res://assets/sounds/music_home.mp3" id="5_8ln24"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ekxnf"]
 texture = ExtResource("1_l6cm7")
@@ -357,6 +358,9 @@ theme_override_fonts/font = ExtResource("4_wu84c")
 theme_override_font_sizes/font_size = 30
 text = "SFX Volume"
 vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_8ln24")
 
 [connection signal="pressed" from="Button_Play" to="." method="_on_button_play_pressed"]
 [connection signal="pressed" from="Button_Setting" to="." method="_on_button_setting_pressed"]

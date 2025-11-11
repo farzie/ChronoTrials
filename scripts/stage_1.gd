@@ -15,6 +15,7 @@ extends Node
 @onready var music = $Music
 
 const TYPE_SPEED := 0.05
+const SPEECH_MOVE_DISTANCE := 150.0
 
 var typing := false
 var skip_pressed := false
@@ -24,12 +25,16 @@ var current_convo := []
 var crystals_collected := 0
 var total_crystals := 4
 var in_conversation := false
+var richard_talked_recently := false
+var crystal_recently_triggered := {}
+var speech_pos_visible := Vector2.ZERO
+var speech_pos_hidden := Vector2.ZERO
 
 var crystal_knowledge := {
-	"NPC_Crystal1": "Perang Salib pertama dimulai pada tahun 1096 dan dipimpin oleh pasukan Eropa untuk merebut Yerusalem.",
-	"NPC_Crystal2": "Richard the Lionheart terkenal karena keberaniannya di Perang Salib ketiga, melawan Saladin.",
-	"NPC_Crystal3": "Kristal ini mengingatkan kita bahwa Perang Salib berlangsung selama hampir 200 tahun.",
-	"NPC_Crystal4": "Banyak kota dan kerajaan didirikan atau hancur akibat Perang Salib, termasuk Kerajaan Yerusalem."
+	"NPC_Crystal1": "Perang Salib pertama dimulai pada tahun 1096 oleh pasukan Katolik merebut Yerusalem.",
+	"NPC_Crystal2": "Richard the Lionheart terkenal di Perang Salib ketiga, melawan Saladin.",
+	"NPC_Crystal3": "Perang Salib berlangsung selama hampir 194 tahun.",
+	"NPC_Crystal4": "Banyak kerajaan didirikan atau hancur akibat Perang Salib, termasuk Kerajaan Yerusalem."
 }
 
 var collected_knowledge := []
@@ -66,7 +71,7 @@ var crystal_found_convo := [
 
 var return_to_richard_convo := [
 	{"speaker": "npc", "text": "Kau telah mengumpulkan semua Kristal Pengetahuan.", "face": "res://assets/sprites/Speech_Lionheart.png"},
-	{"speaker": "npc", "text": "Ya, hanya ini yang kutemukan di pulau ini.", "face": "res://assets/sprites/Speech_Player.png"},
+	{"speaker": "player", "text": "Ya, hanya ini yang kutemukan di pulau ini.", "face": "res://assets/sprites/Speech_Player.png"},
 	{"speaker": "npc", "text": "Ada satu hal lagi yang perlu kamu lakukan...", "face": "res://assets/sprites/Speech_Lionheart.png"},
 	{"speaker": "npc", "text": "Jawablah pertanyaan sesuai apa yang kau pelajari!", "face": "res://assets/sprites/Speech_Lionheart.png"}
 ]
@@ -79,13 +84,22 @@ func _ready() -> void:
 	if music and not music.playing:
 		music.play()
 	
+	speech_pos_hidden = speech_node.position
+	speech_pos_visible = speech_pos_hidden - Vector2(0, SPEECH_MOVE_DISTANCE)
+	
 	speech_button.pressed.connect(_on_skip_pressed)
 	npc_richard.body_entered.connect(_on_npc_richard_collision)
 	npc_crystal1.body_entered.connect(Callable(self, "_on_crystal_collision").bind(npc_crystal1))
 	npc_crystal2.body_entered.connect(Callable(self, "_on_crystal_collision").bind(npc_crystal2))
 	npc_crystal3.body_entered.connect(Callable(self, "_on_crystal_collision").bind(npc_crystal3))
 	npc_crystal4.body_entered.connect(Callable(self, "_on_crystal_collision").bind(npc_crystal4))
-
+	
+	npc_richard.body_exited.connect(_on_npc_richard_exit)
+	npc_crystal1.body_exited.connect(Callable(self, "_on_crystal_exit").bind(npc_crystal1))
+	npc_crystal2.body_exited.connect(Callable(self, "_on_crystal_exit").bind(npc_crystal2))
+	npc_crystal3.body_exited.connect(Callable(self, "_on_crystal_exit").bind(npc_crystal3))
+	npc_crystal4.body_exited.connect(Callable(self, "_on_crystal_exit").bind(npc_crystal4))
+	
 	await get_tree().create_timer(1.0).timeout
 	current_convo = intro_convo
 	convo_index = 0
@@ -94,8 +108,10 @@ func _ready() -> void:
 
 
 func _on_npc_richard_collision(body: Node) -> void:
-	if body.name != "Player" or in_conversation:
+	if body.name != "Player" or in_conversation or richard_talked_recently:
 		return
+
+	richard_talked_recently = true 
 
 	if not npc_triggered:
 		npc_triggered = true
@@ -112,11 +128,16 @@ func _on_npc_richard_collision(body: Node) -> void:
 
 	if current_convo == return_to_richard_convo:
 		await wait_for_convo_end()
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file("res://scenes/stage_1_trivia.tscn")
+
+
+func _on_npc_richard_exit(body: Node) -> void:
+	if body.name == "Player":
+		if not in_conversation:
+			richard_talked_recently = false
 
 
 func wait_for_convo_end() -> void:
-	# Tunggu sampai percakapan selesai (in_conversation = false)
 	while in_conversation:
 		await get_tree().process_frame
 
@@ -124,6 +145,10 @@ func wait_for_convo_end() -> void:
 func _on_crystal_collision(body: Node, crystal: Node) -> void:
 	if body.name != "Player" or in_conversation:
 		return
+	if crystal_recently_triggered.get(crystal.name, false):
+		return
+
+	crystal_recently_triggered[crystal.name] = true
 
 	if npc_triggered:
 		crystals_collected += 1
@@ -138,6 +163,12 @@ func _on_crystal_collision(body: Node, crystal: Node) -> void:
 	speech_face.texture = load("res://assets/sprites/Speech_Player.png")
 	await speech_up(speech_node)
 	await show_convo_line(convo_index)
+
+
+func _on_crystal_exit(body: Node, crystal: Node) -> void:
+	if body.name == "Player":
+		if not in_conversation:
+			crystal_recently_triggered[crystal.name] = false
 
 
 func show_convo_line(index: int) -> void:
@@ -180,14 +211,22 @@ func type_text(t: String) -> void:
 
 func speech_up(n: Node) -> void:
 	in_conversation = true
+	player.can_move = false
 	player_collider.set_deferred("disabled", true)
-	await create_tween().tween_property(n, "position", n.position + Vector2(0, -150), 0.5) \
+	
+	await create_tween().tween_property(n, "position", speech_pos_visible, 0.5) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).finished
+	
+	n.position = speech_pos_visible
 
 
 func speech_down(n: Node) -> void:
-	await create_tween().tween_property(n, "position", n.position + Vector2(0, 150), 0.5) \
+	await create_tween().tween_property(n, "position", speech_pos_hidden, 0.5) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN).finished
+	
+	n.position = speech_pos_hidden
+	
 	speech_text.text = ""
 	player_collider.set_deferred("disabled", false)
+	player.can_move = true
 	in_conversation = false

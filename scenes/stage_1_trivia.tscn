@@ -1,14 +1,52 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1yd7um0mqyuq"]
+[gd_scene load_steps=16 format=3 uid="uid://b1yd7um0mqyuq"]
 
-[ext_resource type="Texture2D" uid="uid://dvg3ewi4ov7js" path="res://assets/images/backgrounds/bg_1.jpg" id="1_ohhtv"]
-[ext_resource type="FontFile" uid="uid://cwhregs6ka4yr" path="res://assets/fonts/poppins-font/PoppinsBold-GdJA.otf" id="2_ug6d2"]
-[ext_resource type="FontFile" uid="uid://c6vea7p880qnd" path="res://assets/fonts/press-start-2p-font/PressStart2P-vaV7.ttf" id="3_gv06u"]
+[ext_resource type="Script" uid="uid://cgjx1yxt757ma" path="res://scripts/stage_1_trivia.gd" id="1_47qxj"]
+[ext_resource type="Texture2D" uid="uid://bntn7pov0gb44" path="res://assets/backgrounds/yerusalem.jpg" id="1_ohhtv"]
+[ext_resource type="Texture2D" uid="uid://c0rdpborrtn33" path="res://assets/sprites/Speech_Lionheart.png" id="2_ohhtv"]
+[ext_resource type="FontFile" uid="uid://dlcywn1wkeki5" path="res://assets/fonts/poppins-font/PoppinsBlack-VxOe.otf" id="3_ohhtv"]
+[ext_resource type="FontFile" uid="uid://cwhregs6ka4yr" path="res://assets/fonts/poppins-font/PoppinsBold-GdJA.otf" id="4_ug6d2"]
+[ext_resource type="AudioStream" uid="uid://hq1vonjgvt02" path="res://assets/sounds/music_desert.mp3" id="5_gv06u"]
+[ext_resource type="FontFile" uid="uid://c6vea7p880qnd" path="res://assets/fonts/press-start-2p-font/PressStart2P-vaV7.ttf" id="7_b7pux"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e4xaw"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ohhtv"]
 texture = ExtResource("1_ohhtv")
-modulate_color = Color(0.35074365, 0.33804843, 0.67604595, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgiw8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gv06u"]
+bg_color = Color(0, 0, 0, 0.6627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ug6d2"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohhtv"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.5729883, 0.5729883, 0.5729883, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6r40"]
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
@@ -20,8 +58,8 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnu0w"]
-bg_color = Color(0, 0.5017437, 0.85814106, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqdkd"]
+bg_color = Color(0.85814106, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -32,8 +70,8 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pipme"]
-bg_color = Color(0, 0.5882353, 1, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sosdp"]
+bg_color = Color(1, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -44,7 +82,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxqpy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fshkb"]
 bg_color = Color(1, 0, 0, 1)
 
 [node name="Stage1Trivia" type="Control"]
@@ -54,6 +92,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_47qxj")
 
 [node name="Panel_Background" type="Panel" parent="."]
 layout_mode = 1
@@ -62,50 +101,815 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_e4xaw")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ohhtv")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Panel_Background" type="Panel" parent="Panel_Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gv06u")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_gv06u")
+
+[node name="Question1" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Question Bar" type="TextureRect" parent="Question1"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 500.0
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Question1/Question Bar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -584.0
+offset_top = 94.0
+offset_right = 584.0
+offset_bottom = 446.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_ug6d2")
+theme_override_font_sizes/normal_font_size = 64
+text = "Apa nama tempat yang diperebutkan pada saat perang salib?"
+horizontal_alignment = 1
+
+[node name="Speaker" type="Control" parent="Question1"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 568.0
+offset_right = 40.0
+offset_bottom = 608.0
+grow_vertical = 0
+
+[node name="SpeechLionheart" type="Sprite2D" parent="Question1/Speaker"]
+position = Vector2(143, -700.99994)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_ohhtv")
+
+[node name="QuestionLabel" type="Label" parent="Question1"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -223.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="OptionA" type="Button" parent="Question1/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -856.0
+offset_top = -222.0
+offset_right = -458.328
+offset_bottom = -125.466675
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "A. Yerusalem"
+
+[node name="OptionB" type="Button" parent="Question1/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -222.0
+offset_right = -47.328003
+offset_bottom = -125.466675
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "B. Magetan"
+
+[node name="OptionC" type="Button" parent="Question1/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -856.0
+offset_top = -98.00001
+offset_right = -458.328
+offset_bottom = -1.4666748
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "C. London"
+
+[node name="OptionD" type="Button" parent="Question1/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -98.00001
+offset_right = -47.328003
+offset_bottom = -1.4666748
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "D. Palestine"
+
+[node name="Question2" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Question Bar" type="TextureRect" parent="Question2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 500.0
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Question2/Question Bar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -584.0
+offset_top = 94.0
+offset_right = 584.0
+offset_bottom = 446.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_ug6d2")
+theme_override_font_sizes/normal_font_size = 64
+text = "Siapa nama tokoh yang dilawan Richard The Lion Heart"
+horizontal_alignment = 1
+
+[node name="Speaker" type="Control" parent="Question2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 568.0
+offset_right = 40.0
+offset_bottom = 608.0
+grow_vertical = 0
+
+[node name="SpeechLionheart" type="Sprite2D" parent="Question2/Speaker"]
+position = Vector2(143, -700.99994)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_ohhtv")
+
+[node name="QuestionLabel" type="Label" parent="Question2"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -223.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="OptionA" type="Button" parent="Question2/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -856.0
+offset_top = -222.0
+offset_right = -458.328
+offset_bottom = -125.466675
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "A. Mashadi"
+
+[node name="OptionB" type="Button" parent="Question2/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -222.0
+offset_right = -47.328003
+offset_bottom = -125.466675
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "B. Saladin"
+
+[node name="OptionC" type="Button" parent="Question2/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -856.0
+offset_top = -98.00001
+offset_right = -458.328
+offset_bottom = -1.4666748
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "C. Mehmed II"
+
+[node name="OptionD" type="Button" parent="Question2/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -98.00001
+offset_right = -47.328003
+offset_bottom = -1.4666748
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "D. Hassan"
+
+[node name="Question3" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Question Bar" type="TextureRect" parent="Question3"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 500.0
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Question3/Question Bar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -584.0
+offset_top = 94.0
+offset_right = 584.0
+offset_bottom = 446.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_ug6d2")
+theme_override_font_sizes/normal_font_size = 64
+text = "Perang salib pertama dimulai pada tahun?"
+horizontal_alignment = 1
+
+[node name="Speaker" type="Control" parent="Question3"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 568.0
+offset_right = 40.0
+offset_bottom = 608.0
+grow_vertical = 0
+
+[node name="SpeechLionheart" type="Sprite2D" parent="Question3/Speaker"]
+position = Vector2(143, -700.99994)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_ohhtv")
+
+[node name="QuestionLabel" type="Label" parent="Question3"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -223.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="OptionA" type="Button" parent="Question3/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -856.0
+offset_top = -222.0
+offset_right = -458.328
+offset_bottom = -125.466675
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "A. 2025"
+
+[node name="OptionB" type="Button" parent="Question3/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -222.0
+offset_right = -47.328003
+offset_bottom = -125.466675
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "B. 1069"
+
+[node name="OptionC" type="Button" parent="Question3/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -856.0
+offset_top = -98.00001
+offset_right = -458.328
+offset_bottom = -1.4666748
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "C. 1169"
+
+[node name="OptionD" type="Button" parent="Question3/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -98.00001
+offset_right = -47.328003
+offset_bottom = -1.4666748
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "D. 1096"
+
+[node name="Question4" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Question Bar" type="TextureRect" parent="Question4"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 500.0
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Question4/Question Bar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -584.0
+offset_top = 94.0
+offset_right = 584.0
+offset_bottom = 446.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_ug6d2")
+theme_override_font_sizes/normal_font_size = 64
+text = "Berapa lama perang salib berlangsung?"
+horizontal_alignment = 1
+
+[node name="Speaker" type="Control" parent="Question4"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 568.0
+offset_right = 40.0
+offset_bottom = 608.0
+grow_vertical = 0
+
+[node name="SpeechLionheart" type="Sprite2D" parent="Question4/Speaker"]
+position = Vector2(143, -700.99994)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_ohhtv")
+
+[node name="QuestionLabel" type="Label" parent="Question4"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -223.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="OptionA" type="Button" parent="Question4/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -856.0
+offset_top = -222.0
+offset_right = -458.328
+offset_bottom = -125.466675
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "A. 69"
+
+[node name="OptionB" type="Button" parent="Question4/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -222.0
+offset_right = -47.328003
+offset_bottom = -125.466675
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "B. 249"
+
+[node name="OptionC" type="Button" parent="Question4/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -856.0
+offset_top = -98.00001
+offset_right = -458.328
+offset_bottom = -1.4666748
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "C. 194"
+
+[node name="OptionD" type="Button" parent="Question4/QuestionLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -445.0
+offset_top = -98.00001
+offset_right = -47.328003
+offset_bottom = -1.4666748
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+focus_mode = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/line_spacing = 4
+theme_override_fonts/font = ExtResource("3_ohhtv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ug6d2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ohhtv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ohhtv")
+text = "D. 214"
+
+[node name="Win" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bar" type="TextureRect" parent="Win"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Win/Bar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -319.5
-offset_top = -252.0
-offset_right = 319.5
-offset_bottom = 57.0
+offset_left = -327.0
+offset_top = -179.0
+offset_right = 555.0
+offset_bottom = 323.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/normal_font = ExtResource("2_ug6d2")
-theme_override_font_sizes/normal_font_size = 60
-text = "Apa nama perpustakaan besar di Baghdad?"
+theme_override_fonts/normal_font = ExtResource("4_ug6d2")
+theme_override_font_sizes/normal_font_size = 64
+text = "Selamat! Kamu berhasil menjawab semua pertanyaanku, sekarang kamu dapat kembali ke duniamu."
+horizontal_alignment = 1
+
+[node name="Speaker" type="Control" parent="Win"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 568.0
+offset_right = 40.0
+offset_bottom = 608.0
+grow_vertical = 0
+
+[node name="SpeechLionheart" type="Sprite2D" parent="Win/Speaker"]
+position = Vector2(143, -700.99994)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_ohhtv")
+
+[node name="Button_Exit" type="Button" parent="Win"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -86.0
+offset_right = -31.000366
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.735357, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_b7pux")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_k6r40")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sqdkd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sosdp")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fshkb")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sqdkd")
+text = "EXIT"
+
+[node name="Lose" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bar" type="TextureRect" parent="Lose"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Lose/Bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_ug6d2")
+theme_override_font_sizes/normal_font_size = 128
+text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button_Play" type="Button" parent="."]
+[node name="Speaker" type="Control" parent="Lose"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 568.0
+offset_right = 40.0
+offset_bottom = 608.0
+grow_vertical = 0
+
+[node name="Button_Exit" type="Button" parent="Lose"]
+layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = 66.0
-offset_right = 75.0
-offset_bottom = 126.0
+anchor_bottom = 1.0
+offset_left = -74.99982
+offset_top = -128.0
+offset_right = 74.99982
+offset_bottom = -68.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0.5737749, 0.735357, 1)
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.735357, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_gv06u")
+theme_override_fonts/font = ExtResource("7_b7pux")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_tgiw8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bnu0w")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pipme")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_rxqpy")
-theme_override_styles/focus = SubResource("StyleBoxFlat_bnu0w")
-text = "PLAY"
+theme_override_styles/normal = SubResource("StyleBoxFlat_k6r40")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sqdkd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sosdp")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fshkb")
+theme_override_styles/focus = SubResource("StyleBoxFlat_sqdkd")
+text = "EXIT"

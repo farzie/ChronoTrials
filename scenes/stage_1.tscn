@@ -1198,8 +1198,8 @@ position = Vector2(-530, 640)
 scale = Vector2(0.25, 0.25)
 
 [node name="Sprite2d" type="Sprite2D" parent="Ysorting/NPC_Richard"]
-position = Vector2(0, -200)
 texture = ExtResource("42_esvoy")
+offset = Vector2(0, -240)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ysorting/NPC_Richard"]
 position = Vector2(0, -50)
